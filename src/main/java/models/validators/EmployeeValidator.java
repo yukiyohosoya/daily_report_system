@@ -24,11 +24,11 @@ public class EmployeeValidator {
      */
 
     public static List<String> validate(
-            EmployeeService service, EmployeeView ev,Boolean codeDuqlicateCheckFlag, Boolean passwordCheckFlag){
+            EmployeeService service, EmployeeView ev,Boolean codeDuplicateCheckFlag, Boolean passwordCheckFlag){
         List<String>errors = new ArrayList<String>();
 
         //社員番号のチェック
-        String codeError = validateCode(service,ev.getClass(),codeDuqlicateCheckFlag);
+        String codeError  = validateCode(service, ev.getCode(),codeDuplicateCheckFlag);
         if(!codeError.equals("")) {
             errors.add(codeError);
         }

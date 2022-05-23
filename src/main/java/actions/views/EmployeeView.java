@@ -43,7 +43,7 @@ public class EmployeeView {
      * 管理者権限があるかどうか（一般：0、管理者:1）
      */
 
-    private String adminFlag;
+    private Integer  adminFlag;
 
     /**
      * 登録日時

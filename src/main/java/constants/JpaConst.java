@@ -23,6 +23,7 @@ public interface JpaConst {
     String EMP_COL_PASS="password"; //パスワード
     String EMP_COL_ADMIN_FLAG="admin_flag"; //管理者権限
     String EMP_COL_CREATED_AT="created_at"; //登録日時
+
     String EMP_COL_UPDATED_AT="updated_at"; //更新日時
     String EMP_COL_DELETE_FLAG ="delete_flag"; //削除フラグ
 
@@ -42,6 +43,10 @@ public interface JpaConst {
     String REP_COL_CONTENT="content";//日報の内容
     String REP_COL_CREATED_AT="created_at";//登録日時
     String REP_COL_UPDATED_AT="updated_at";//更新日時
+
+    //↓追記
+    String REP_COL_ATTENDACE_T="attendance_time";//追記　出勤時間
+    String REP_COL_LEAVE_T="leave_time";//追記　退勤時間
 
     //Entity名
     String ENTITY_EMP="employee";//従業員

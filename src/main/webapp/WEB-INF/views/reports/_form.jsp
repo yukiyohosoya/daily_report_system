@@ -18,9 +18,22 @@
 <input type="date" name="${AttributeConst.REP_DATE.getValue()}" value= "<fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' />" />
 <br /><br />
 
+
+<fmt:parseDate value="${report.att_T}" pattern="kk:mm" var="reportAT" type="date" />
+<label for="${AttributeConst.REP_ATTENDACE_T.getValue()}">出勤時間</label><br />
+<input type="time" name="${AttributeConst.REP_ATTENDACE_T.getValue()}" value="<fmt:formatDate value='${reportAT}' pattern='kk:mm' />" />
+<br /><br />
+
+<fmt:parseDate value="${report.lea_T}" pattern="kk:mm" var="reportLT" type="date" />
+<label for="${AttributeConst.REP_LEAVE_T.getValue()}">退勤時間</label><br />
+<input type="time" name="${AttributeConst.REP_LEAVE_T.getValue()}" value="<fmt:formatDate value='${reportAT}' pattern='kk:mm' />" />
+<br /><br />
+
+
 <label for="name">氏名</label><br />
 <c:out value="${sessionScope.login_employee.name}" />
 <br /><br />
+
 
 <label for="${AttributeConst.REP_TITLE.getValue()}" >タイトル</label><br />
 <input type="text" name="${AttributeConst.REP_TITLE.getValue()}" value="${report.title}" />

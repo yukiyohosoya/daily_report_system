@@ -20,7 +20,12 @@ public enum MessageConst {
     E_NOEMP_CODE("社員番号を入力してください。"),
     E_EMP_CODE_EXIST("入力された社員番号の情報は既に存在しています。"),
     E_NOTITLE("タイトルを入力してください。"),
-    E_NOCONTENT("内容を入力してください。");
+    E_NOCONTENT("内容を入力してください。"),
+    E_NOATT("出勤時間を入力してください。"),
+    E_NOLET("退勤時間を入力してください。"),
+    E_NOTIMEMATCH("退勤時間が出勤時間より大きいです。"),
+    E_NOINT_A("出勤時間は時間で入力してください。"),
+    E_NOINT_L("退勤時間は時間で入力してください。");
 
     //文字列
     private final String text;

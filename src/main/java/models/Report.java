@@ -2,7 +2,6 @@ package models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -105,14 +104,14 @@ public class Report {
      */
 
     @Column( name = JpaConst.REP_COL_ATTENDACE_T ,nullable=false)
-    private LocalTime att_T;
+    private String att_T;
 
     /**
      * 出勤時間
      */
 
     @Column( name = JpaConst.REP_COL_LEAVE_T ,nullable=false)
-    private LocalTime lea_T;
+    private String lea_T;
 
 
 }

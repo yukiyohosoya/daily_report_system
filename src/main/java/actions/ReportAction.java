@@ -14,7 +14,6 @@ import constants.MessageConst;
 import services.ReportService;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * 日報に関する処理を行うActionクラス
@@ -116,8 +115,8 @@ public class ReportAction extends ActionBase {
                     getRequestParam(AttributeConst.REP_CONTENT),
                     null,
                     null,
-                    LocalTime.parse(getRequestParam(AttributeConst.REP_ATTENDACE_T)),
-                    LocalTime.parse(getRequestParam(AttributeConst.REP_LEAVE_T)));
+                    getRequestParam(AttributeConst.REP_ATTENDACE_T),
+                    getRequestParam(AttributeConst.REP_LEAVE_T));
 
             //日報情報登録
             List<String> errors = service.create(rv);
@@ -213,9 +212,8 @@ public class ReportAction extends ActionBase {
             rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
             rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
             rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
-            rv.setAtt_T(toLocalTime(getRequestParam(AttributeConst.REP_ATTENDACE_T)));
-            rv.setLea_T(toLocalTime(getRequestParam(AttributeConst.REP_LEAVE_T)));
-
+            rv.setAtt_T(getRequestParam(AttributeConst.REP_ATTENDACE_T));
+            rv.setLea_T(getRequestParam(AttributeConst.REP_LEAVE_T));
 
             //日報データを更新
             List<String> errors = service.update(rv);

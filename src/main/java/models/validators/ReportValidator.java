@@ -2,6 +2,10 @@ package models.validators;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.sql.Time;
+
 
 import actions.views.ReportView;
 import constants.MessageConst;
@@ -31,6 +35,28 @@ public class ReportValidator {
         if(!contentError.equals("")) {
             errors.add(contentError);
         }
+
+        //出勤時間が入っているかのチェック
+        String att_tError = validateatt_T(rv.getAtt_T());
+        if(!att_tError.equals("")) {
+            errors.add(att_tError);
+        }
+
+        //退勤時間が入っているかのチェック
+        String lea_tError = validatelea_T(rv.getLea_T());
+        if(!lea_tError.equals("")) {
+            errors.add(lea_tError);
+        }
+
+        //出退勤時間の矛盾のチェック。まず空じゃないのをチェック
+        if(lea_tError.equals("")||att_tError.equals("")) {
+            String afterError = validateafter(rv.getAtt_T(),rv.getLea_T());
+            if(!afterError.equals("")) {
+                errors.add(afterError);
+            }
+
+        }
+
 
         return errors;
 
@@ -62,6 +88,57 @@ public class ReportValidator {
 
         //入力値がある場合は空文字を返却
         return "";
+    }
+
+    /**
+     * 出勤時間に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param att_T 内容
+     * @return エラーメッセージ
+     */
+    private static String validateatt_T(String  att_T) {
+        Pattern p = Pattern.compile("^([0-1][0-9]|[2][0-3]):[0-5][0-9]$");
+        Matcher m = p.matcher(att_T);
+        if(att_T==null||att_T.equals("")) {
+            return MessageConst.E_NOATT.getMessage();
+        }else if(m.find()==false) {
+            return MessageConst.E_NOINT_A.getMessage();
+        }
+        //入力値がある場合は空文字を返却
+        return "";
+    }
+
+    /**
+     * 退勤時間に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param lea_T 内容
+     * @return エラーメッセージ
+     */
+    private static String validatelea_T(String  lea_T) {
+        Pattern p = Pattern.compile("^([0-1][0-9]|[2][0-3]):[0-5][0-9]$");
+        Matcher m = p.matcher(lea_T);
+        if(lea_T==null||lea_T.equals("")) {
+            return MessageConst.E_NOLET.getMessage();
+        }else if(m.find()==false) {
+            return MessageConst.E_NOINT_L.getMessage();
+        }
+        //入力値がある場合は空文字を返却
+        return "";
+    }
+
+    /**
+     * 退勤時間に入力値があるかをチェックし、入力値がなければエラーメッセージを返却
+     * @param lea_T 内容
+     * @return エラーメッセージ
+     */
+    private static String validateafter(String  att_T,String  lea_T) {
+             Time at = Time.valueOf(att_T + ":00");
+             Time lt = Time.valueOf(lea_T + ":00");
+             if (at.after(lt)) {
+                 return MessageConst.E_NOTIMEMATCH.getMessage();
+             } else {
+                 return "";
+             }
+
+
     }
 
 

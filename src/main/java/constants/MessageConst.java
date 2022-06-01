@@ -24,8 +24,7 @@ public enum MessageConst {
     E_NOATT("出勤時間を入力してください。"),
     E_NOLET("退勤時間を入力してください。"),
     E_NOTIMEMATCH("退勤時間が出勤時間より大きいです。"),
-    E_NOINT_A("出勤時間は時間で入力してください。"),
-    E_NOINT_L("退勤時間は時間で入力してください。");
+    E_NOTIME("時間で入力してください。");
 
     //文字列
     private final String text;

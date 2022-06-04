@@ -83,7 +83,7 @@ public class EmployeeAction extends ActionBase {
 
         //新規登録画面を表示
         forward(ForwardConst.FW_EMP_NEW);
-        }
+       }
     }
 
 
@@ -135,7 +135,7 @@ public class EmployeeAction extends ActionBase {
                 redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
             }
 
-        }
+       }
     }
 
     /**

@@ -36,35 +36,34 @@ public class ReportValidator {
             errors.add(contentError);
         }
 
-        //出勤時間が入っているかのチェック
+        //出退勤時間の時間形式のチェック。まず空じゃないのをチェック
         String att_tError = validateatt_T(rv.getAtt_T());
+        String lea_tError = validatelea_T(rv.getLea_T());
+
+        //出勤時間が入っているかのチェック
         if(!att_tError.equals("")) {
             errors.add(att_tError);
         }
 
         //退勤時間が入っているかのチェック
-        String lea_tError = validatelea_T(rv.getLea_T());
+
         if(!lea_tError.equals("")) {
             errors.add(lea_tError);
         }
 
-
-        //出退勤時間の時間形式のチェック。まず空じゃないのをチェック
         if(lea_tError.equals("") && att_tError.equals("")) {
             String timeError = validatTime(rv.getAtt_T(),rv.getLea_T());
             if(!timeError.equals("")) {
                 errors.add(timeError);
+            }else {
+                //出退勤時間の矛盾のチェック。まず空じゃないのをチェック
+                String afterError = validateafter(rv.getAtt_T(),rv.getLea_T());
+                if(!afterError.equals("")) {
+                    errors.add(afterError);
+                    }
             }
 
-        }
-        //出退勤時間の矛盾のチェック。まず空じゃないのをチェック
-        if(lea_tError.equals("") && att_tError.equals("")) {
-            String afterError = validateafter(rv.getAtt_T(),rv.getLea_T());
-            if(!afterError.equals("")) {
-                errors.add(afterError);
-            }
-
-        }
+    }
 
 
         return errors;
@@ -137,9 +136,10 @@ public class ReportValidator {
         Matcher ml = p.matcher(lea_T);
         if(!ma.find()||!ml.find()) {
             return MessageConst.E_NOTIME.getMessage();
-        }
+        } else {
         //入力値がある場合は空文字を返却
         return "";
+        }
     }
 
     /**
@@ -148,6 +148,23 @@ public class ReportValidator {
      * @return エラーメッセージ
      */
     private static String validateafter(String  att_T,String  lea_T) {
+             Time at = Time.valueOf(att_T + ":00");
+             Time lt = Time.valueOf(lea_T + ":00");
+             if (at.after(lt)) {
+                 return MessageConst.E_NOTIMEMATCH.getMessage();
+             } else {
+                 return "";
+             }
+
+
+    }
+
+    /**
+     * そもそも数字が入力されているかをチェックし、正しくなければエラーメッセージを返却
+     * @param lea_T 内容
+     * @return エラーメッセージ
+     */
+    private static String validatenumber(String  att_T,String  lea_T) {
              Time at = Time.valueOf(att_T + ":00");
              Time lt = Time.valueOf(lea_T + ":00");
              if (at.after(lt)) {

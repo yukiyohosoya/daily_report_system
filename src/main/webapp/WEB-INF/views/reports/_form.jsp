@@ -19,14 +19,12 @@
 <br /><br />
 
 
-<fmt:parseDate value="${report.att_T}" pattern="kk:mm" var="reportAT" type="date" />
 <label for="${AttributeConst.REP_ATTENDACE_T.getValue()}">出勤時間</label><br />
-<input type="time" name="${AttributeConst.REP_ATTENDACE_T.getValue()}" value="<fmt:formatDate value='${reportAT}' pattern='kk:mm' />" />
+<input type="time" name="${AttributeConst.REP_ATTENDACE_T.getValue()}" value="${report.att_T}" />
 <br /><br />
 
-<fmt:parseDate value="${report.lea_T}" pattern="kk:mm" var="reportLT" type="date" />
 <label for="${AttributeConst.REP_LEAVE_T.getValue()}">退勤時間</label><br />
-<input type="time" name="${AttributeConst.REP_LEAVE_T.getValue()}" value="<fmt:formatDate value='${reportAT}' pattern='kk:mm' />" />
+<input type="time" name="${AttributeConst.REP_LEAVE_T.getValue()}" value="${report.lea_T}"/>
 <br /><br />
 
 
